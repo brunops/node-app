@@ -1,4 +1,13 @@
-var server = require('./server');
+var server = require('./server'),
+    router = require('./router');
 
-server.start();
+var handle = {};
+handle['/'] = function (res) {
+  res.end('start');
+};
+handle['/sup'] = function (res) {
+  res.end('sup');
+};
+
+server.start(handle, router.route);
 
