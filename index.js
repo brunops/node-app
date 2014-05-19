@@ -4,7 +4,7 @@ var server = require('./server'),
 
 var handle = {};
 handle['/'] = requestHandlers.start;
-handle['/sup'] = requestHandlers.sup;
+handle['/start'] = requestHandlers.start;
 
 server.start(handle, router.route);
 
