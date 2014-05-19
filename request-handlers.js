@@ -1,3 +1,5 @@
+var querystring = require('querystring');
+
 function start(res) {
   var body = '<html>'
     + '<head>'
@@ -18,12 +20,19 @@ function start(res) {
   res.end();
 }
 
-function sup(res) {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.write('Sup!');
-  res.end();
+function upload(res, req) {
+  var body = '';
+  req.on('data', function (chunk) {
+    body += chunk.toString();
+  });
+
+  req.on('end', function () {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.write('Data posted: "' + querystring.parse(body).text + '"');
+    res.end();
+  });
 }
 
 exports.start = start;
-exports.sup = sup;
+exports.upload = upload;
 

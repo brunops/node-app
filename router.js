@@ -1,7 +1,7 @@
 
 exports.route = function (handle, path, req, res) {
   if (typeof handle[path] === 'function') {
-    handle[path](res);
+    handle[path](res, req);
   }
   else {
     res.writeHead(404, { 'Content-type': 'text/plain' });
