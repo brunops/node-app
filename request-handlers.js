@@ -1,4 +1,4 @@
-var querystring = require('querystring');
+var formidable = require('formidable');
 
 function start(res) {
   var body = '<html>'
@@ -21,16 +21,22 @@ function start(res) {
 }
 
 function upload(res, req) {
-  var body = '';
-  req.on('data', function (chunk) {
-    body += chunk.toString();
-  });
+  var form = new formidable.IncomingForm();
 
-  req.on('end', function () {
+  form.parse(req, function (err, fields, files) {
+    console.log(fields);
+    console.log(files);
     res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.write('Data posted: "' + querystring.parse(body).text + '"');
+    res.write('Data posted: "' + fields.text + '"');
     res.end();
   });
+  //var body = '';
+  //req.on('data', function (chunk) {
+  //  body += chunk.toString();
+  //});
+
+  //req.on('end', function () {
+  //});
 }
 
 exports.start = start;
