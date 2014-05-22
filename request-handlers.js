@@ -24,19 +24,10 @@ function upload(res, req) {
   var form = new formidable.IncomingForm();
 
   form.parse(req, function (err, fields, files) {
-    console.log(fields);
-    console.log(files);
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.write('Data posted: "' + fields.text + '"');
     res.end();
   });
-  //var body = '';
-  //req.on('data', function (chunk) {
-  //  body += chunk.toString();
-  //});
-
-  //req.on('end', function () {
-  //});
 }
 
 exports.start = start;
